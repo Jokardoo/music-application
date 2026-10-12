@@ -1,0 +1,51 @@
+package ru.jokardo.music_service.mapper;
+
+import org.springframework.stereotype.Component;
+import ru.jokardo.auth.contracts.grpc.UserProfileGrpc;
+import ru.jokardo.music_service.dto.UserProfile;
+import ru.jokardo.music_service.enums.RoleEnum;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Component
+public class UserProfileGrpcMapper {
+
+    public UserProfile toUserProfile(UserProfileGrpc proto) {
+        return UserProfile.builder()
+                .id(parseUuid(proto.getId()))
+                .username(proto.getUsername())
+                .email(emptyToNull(proto.getEmail()))
+                .role(parseRole(proto.getRole()))
+                .blocked(proto.getBlocked())
+                .createdAt(parseDateTime(proto.getCreatedAt()))
+                .updatedAt(parseDateTime(proto.getUpdatedAt()))
+                .build();
+    }
+
+    private UUID parseUuid(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return UUID.fromString(value);
+    }
+
+    private RoleEnum parseRole(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return RoleEnum.valueOf(value);
+    }
+
+    private LocalDateTime parseDateTime(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return LocalDateTime.parse(value);
+    }
+
+    private String emptyToNull(String value) {
+        return (value == null || value.isEmpty()) ? null : value;
+    }
+
+}
