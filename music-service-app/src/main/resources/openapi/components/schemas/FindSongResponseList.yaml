@@ -1,0 +1,7 @@
+type: object
+properties:
+  songResponseList:
+    type: array
+    description: Список найденных песен
+    items:
+      $ref: './FindSongResponse.yaml'

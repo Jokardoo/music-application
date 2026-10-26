@@ -1,0 +1,7 @@
+name: maxDurationInSeconds
+in: query
+required: false
+description: Максимальная продолжительность в секундах
+schema:
+  type: integer
+  minimum: 1

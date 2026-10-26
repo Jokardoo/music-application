@@ -1,0 +1,7 @@
+name: minDurationInSeconds
+in: query
+required: false
+description: Минимальная продолжительность в секундах
+schema:
+  type: integer
+  minimum: 1

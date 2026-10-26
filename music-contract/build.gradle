@@ -1,0 +1,83 @@
+plugins {
+    id 'java-library'
+    id 'org.openapi.generator'
+    id 'io.spring.dependency-management'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
+//tasks.register('bundleOpenApi', Exec) {
+//    workingDir rootDir
+//    commandLine 'cmd', '/c', 'npx', '--yes', '@redocly/cli', 'bundle',
+//            'src/main/resources/openapi/openapi.yaml',
+//            '-o', "$buildDir/merged-openapi.yaml"
+//}
+
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = file("src/main/resources/openapi/openapi.yaml").absolutePath
+    outputDir = "$buildDir/generated/openapi"
+    apiPackage = "ru.jokardo.music.contract.api"
+    modelPackage = "ru.jokardo.music.contract.model"
+    configOptions = [
+            interfaceOnly: "true",
+            useSpringBoot4: "true",
+            useBeanValidation: "true",
+            useTags: "true", // подтягивает из openapi-bundle tag и добавляет его в название интерфейса
+            useResponseEntity: "false",  // чтобы Контроллер возвращал не ResponseEntity, а DTO
+            additionalModelTypeAnnotations: "@lombok.Builder;@lombok.AllArgsConstructor;@lombok.NoArgsConstructor;@lombok.With"   // Добавляет аннотацию @Builder к сгенерированным классам
+    ]
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "$buildDir/generated/openapi/src/main/java"
+        }
+    }
+}
+
+compileJava.dependsOn tasks.openApiGenerate
+
+group = 'ru.jokardo'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+    // Spring Web (ResponseEntity, @RequestMapping, @RequestBody и т.д.)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Swagger аннотации (@Operation, @Schema, @ApiResponse и т.д.)
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1'
+    // Jackson аннотации (@JsonInclude, @JsonProperty)
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    // Jakarta Annotation (@Generated)
+    implementation 'jakarta.annotation:jakarta.annotation-api'
+    // Jakarta Servlet (HttpServletResponse)
+    implementation 'jakarta.servlet:jakarta.servlet-api'
+    // Jakarta Validation
+    implementation 'jakarta.validation:jakarta.validation-api'
+
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+    // ======== Lombok ===========
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

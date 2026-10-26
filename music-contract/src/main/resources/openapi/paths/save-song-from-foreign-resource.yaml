@@ -1,0 +1,23 @@
+post:
+  tags:
+    - music
+  operationId: saveSongFromForeignResourceV1
+  summary: Сохранить песню локально
+  description: поиск трека по id в удаленном источнике и его последующее сохранение в локальном хранилище
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/requests/SaveSongFromForeignResourceRequest.yaml'
+  responses:
+    '201':
+      description: Сохранение успешно
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/responses/SavedSongFromForeignResourceResponse.yaml'
+    '400':
+      description: Некорректные входные данные
+    '500':
+      description: Внутренняя ошибка сервера

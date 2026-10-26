@@ -1,0 +1,110 @@
+openapi: 3.0.1
+servers:  # Использовать необязательно. В целях безопасности лучше не указывать
+  - url: http://{host}:{port}
+    description: Сервер локальной разработки
+    variables:
+      host:
+        default: localhost
+        description: _Адрес сервиса_
+      port:
+        enum:
+          - "9091"
+          - "8080"
+        default: "9091"
+        description: Порт сервиса
+tags:
+  - name: music
+    description: |
+      ***Операции с музыкальными треками***
+
+info:
+  title: Music Service API
+  version: 1.0.0
+  description: | 
+    `API` для поиска, создания и сохранения музыкальных треков.
+    Поддерживает поиск по локальной БД и сохранение из внешних источников (Hitmo).
+    ### С какими удаленными ресурсами работает сервис:
+    - Hitmoz.org
+  termsOfService: https://music-service.xom/terms # Условия предоставления услуг
+  contact:
+    name: Api Music-service
+    url: http://music-service.com
+    email: youDontWantToKnow@NOmail.com
+  license:  # Информация о лицензии
+    name: Apache 2.0
+    url: https://music-service/license.html
+paths:
+  /api/v1/music/find:
+    $ref: './paths/find-music.yaml'
+
+  /api/v1/music/find-contains-music:
+    $ref: './paths/find-contains-song.yaml'
+
+  /api/v1/music/song:
+    $ref: './paths/create-song.yaml'
+
+  /api/v1/music/save:
+    $ref: './paths/save-song-from-foreign-resource.yaml'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+
+#    ============ Enum ============
+
+    MusicGenre:
+      $ref: './components/schemas/MusicGenre.yaml'
+
+#    ============ Request =============
+    FindSongRequest:
+      $ref: './components/schemas/requests/FindSongRequest.yaml'
+
+    SongCreateRequest:
+      $ref: './components/schemas/requests/SongCreateRequest.yaml'
+
+    FindContainsSongRequest:
+      $ref: './components/schemas/requests/FindContainsSongRequest.yaml'
+
+    SaveSongFromForeignResourceRequest:
+      $ref: './components/schemas/requests/SaveSongFromForeignResourceRequest.yaml'
+
+#    ============== Response ==================
+    FindSongResponse:
+      $ref: './components/schemas/responses/FindSongResponse.yaml'
+
+    FindSongResponseList:
+      $ref: "./components/schemas/responses/FindSongResponseList.yaml"
+
+    SongCreatedResponse:
+      $ref: './components/schemas/responses/SongCreatedResponse.yaml'
+
+    FindContainsSongsResponseList:
+      $ref: './components/schemas/responses/FindContainsSongsResponseList.yaml'
+
+    FindContainsSongResponse:
+      $ref: './components/schemas/responses/FindContainsSongResponse.yaml'
+
+    SavedSongFromForeignResourceResponse:
+      $ref: './components/schemas/responses/SavedSongFromForeignResourceResponse.yaml'
+
+  parameters:
+    MusicianName:
+      $ref: './components/parameters/MusicianName.yaml'
+
+    SongName:
+      $ref: './components/parameters/SongName.yaml'
+
+    MinDurationInSeconds:
+      $ref: './components/parameters/MinDurationInSeconds.yaml'
+
+    MaxDurationInSeconds:
+      $ref: './components/parameters/MaxDurationInSeconds.yaml'
+
+# Впоследствии изменить
+#security:
+#  - bearerAuth: []

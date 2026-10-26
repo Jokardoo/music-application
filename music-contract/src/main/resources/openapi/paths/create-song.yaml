@@ -1,0 +1,23 @@
+post:
+  tags:
+    - music
+  operationId: createSong
+  summary: Создание трека
+  description: Заполнение формы информации о треке с последующим созданием
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/requests/SongCreateRequest.yaml'
+  responses:
+    '201':
+      description: Трек создан
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/responses/SongCreatedResponse.yaml'
+    '400':
+      description: Некорректные входные данные
+    '500':
+      description: Внутренняя ошибка сервера

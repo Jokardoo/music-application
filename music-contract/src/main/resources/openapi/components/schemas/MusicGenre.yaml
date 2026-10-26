@@ -1,0 +1,34 @@
+type: string
+description: Музыкальный жанр
+enum:
+  - CLASSICAL
+  - JAZZ
+  - BLUES
+  - ROCK
+  - ALTERNATIVE_ROCK
+  - PUNK
+  - METAL
+  - POP
+  - INDIE_POP
+  - K_POP
+  - LATIN_POP
+  - HIP_HOP
+  - HOUSE
+  - TECHNO
+  - TRANCE
+  - AMBIENT
+  - DUBSTEP
+  - DRUM_AND_BASS
+  - SYNTHWAVE
+  - DISCO_FUNK
+  - RNB_SOUL
+  - REGGAE
+  - LATIN
+  - FOLK
+  - AFRO
+  - ASIAN_TRADITIONAL
+  - GOSPEL
+  - SOUNDTRACK
+  - INSTRUMENTAL
+  - OTHER
+  - UNKNOWN

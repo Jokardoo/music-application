@@ -1,0 +1,27 @@
+type: object
+properties:
+  songIdFromResource:
+    type: string
+    description: Идентификатор песни во внешнем источнике
+  resourceName:
+    type: string
+    description: Название ресурса-источника
+  musicianName:
+    type: string
+    description: Имя музыканта
+  songName:
+    type: string
+    description: Название песни
+  duration:
+    type: string
+    description: Длительность в формате строки
+  sizeInMegabytes:
+    type: number
+    format: double
+    description: Размер файла в мегабайтах
+  downloadUrl:
+    type: string
+    description: Ссылка на скачивание
+  imageUrl:
+    type: string
+    description: Ссылка на изображение

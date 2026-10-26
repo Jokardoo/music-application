@@ -1,0 +1,22 @@
+get:
+  tags:
+    - music
+  operationId: findMusic
+  summary: Найти список треков по совокупности имени исполнителя и названия трека
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/FindSongRequest.yaml'
+  responses:
+    '200':
+      description: список треков найдем
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/FindSongResponseList.yaml'
+    '400':
+      description: Некорректные входные данные
+    '500':
+      description: Внутренняя ошибка сервера

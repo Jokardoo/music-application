@@ -1,0 +1,10 @@
+type: object
+properties:
+  musicianName:
+    type: string
+    description: Имя музыканта
+    example: Muse
+  songName:
+    type: string
+    description: Название песни
+    example: Supermassive black hole

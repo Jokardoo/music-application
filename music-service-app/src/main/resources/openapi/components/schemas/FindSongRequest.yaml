@@ -1,0 +1,20 @@
+type: object
+properties:
+  musicianName:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-size-message: "Name size should be between 1 and 255 characters!"
+  songName:
+    type: string
+    minLength: 2
+    maxLength: 100
+    x-size-message: "Song name size should be between 2 and 100 characters!"
+  minDurationInSeconds:
+    type: integer
+    minimum: 1
+    x-min-message: "'Min duration' should be positive!"
+  maxDurationInSeconds:
+    type: integer
+    minimum: 1
+    x-min-message: "'Max duration' should be positive!"

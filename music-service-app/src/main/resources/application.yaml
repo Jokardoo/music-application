@@ -1,0 +1,46 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: music-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      mode: always
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.xml
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:6432/postgres}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:qwerty}
+
+  data:
+    redis:
+      host: localhost
+      port: 6380
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8 # Максимальное количество активных соединений. Запрос свыше этого параметра встанет в очередь
+          max-idle: 5 # Максимальное количество простаивающих соединений (готовых к работе). Значение свыше создаст дополнительный поток
+
+
+  grpc:
+    client:
+      channel:
+        auth-service: # Это имя вы будете использовать в @ImportGrpcClients
+          target: static://localhost:9090 # Адрес и порт вашего AuthService
+
+springdoc:
+  api-docs:
+    enabled: false # Отключаем автогенерацию из кода, если она не нужна
+  swagger-ui:
+    url: /openapi.yaml # Swagger UI будет читать этот файл
+    path: /swagger-ui.html
+

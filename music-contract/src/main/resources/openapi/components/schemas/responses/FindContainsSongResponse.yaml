@@ -1,0 +1,20 @@
+type: object
+properties:
+  musicianName:
+    type: string
+    description: Имя музыканта
+    example: Muse
+  songName:
+    type: string
+    description: Название песни
+    example: Supermassive black hole
+  albumName:
+    type: string
+    description: Название альбома
+    example: Black Holes and Revelations
+  releaseDate:
+    type: string
+    description: Дата релиза
+    example: 2006.06
+  musicGenre:
+    $ref: '../../../openapi.yaml#/components/schemas/MusicGenre'

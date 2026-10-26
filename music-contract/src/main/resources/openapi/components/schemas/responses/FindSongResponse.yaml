@@ -1,0 +1,33 @@
+type: object
+properties:
+  songIdFromResource:
+    type: string
+    description: Идентификатор песни во внешнем источнике
+    example: 47894330
+  resourceName:
+    type: string
+    description: Название ресурса-источника
+    example: hitmoz.org
+  musicianName:
+    type: string
+    description: Имя музыканта
+    example: Muse
+  songName:
+    type: string
+    description: Название песни
+    example: Supermassive black hole
+  duration:
+    type: string
+    description: Длительность в формате строки
+    example: 03:29
+  sizeInMegabytes:
+    type: number
+    format: double
+    description: Размер файла в мегабайтах
+    example: 6.39
+  downloadUrl:
+    type: string
+    description: Ссылка на скачивание
+  imageUrl:
+    type: string
+    description: Ссылка на изображение

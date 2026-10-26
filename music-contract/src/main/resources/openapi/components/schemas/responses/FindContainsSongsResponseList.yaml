@@ -1,0 +1,7 @@
+type: object
+properties:
+  containsSongs:
+    type: array
+    description: Список найденных имеющихся песен
+    items:
+      $ref: '../../../openapi.yaml#/components/schemas/FindContainsSongResponse'

@@ -1,0 +1,7 @@
+name: musicianName
+description: Имя исполнителя
+schema:
+  type: string
+  minLength: 1
+  maxLength: 255
+  x-size-message: "Name size should be between 1 and 255 characters!"

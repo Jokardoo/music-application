@@ -1,0 +1,9 @@
+name: songName
+in: query
+required: false
+description: Название песни
+schema:
+  type: string
+  minLength: 2
+  maxLength: 100
+  x-size-message: "Song name size should be between 2 and 100 characters!"

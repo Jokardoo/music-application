@@ -1,0 +1,58 @@
+get:
+  tags:
+    - music
+  operationId: findContainsSongV1
+  summary: Поиск локального трека
+  description: Найти песню в локальном хранилище (трек должен быть заранее добавлен с удаленного хранилища в локальную базу)
+  parameters:
+#    - $ref: '../components/parameters/MusicianName.yaml'
+#    - $ref: '../components/parameters/SongName.yaml'
+#    - $ref: '../components/parameters/MinDurationInSeconds.yaml'
+#    - $ref: '../components/parameters/MaxDurationInSeconds.yaml'
+    - name: filter
+      in: query
+      required: false
+      description: Фильтр для поиска трека
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/FindContainsSongRequest'
+
+#      description: Имя исполнителя
+#      schema:
+#        type: string
+#        minLength: 1
+#        maxLength: 255
+#    - name: songName
+#      in: query
+#      required: false
+#      description: Название песни
+#      schema:
+#        type: string
+#        minLength: 2
+#        maxLength: 100
+#    - name: minDurationInSeconds
+#      in: query
+#      required: false
+#      description: Минимальная продолжительность в секундах
+#      schema:
+#        type: integer
+#        minimum: 1
+#    - name: maxDurationInSeconds
+#      in: query
+#      required: false
+#      description: Максимальная продолжительность в секундах
+#      schema:
+#        type: integer
+#        minimum: 1
+  responses:
+    '200':
+      description: Список песен из локальной базы данных найден
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/responses/FindContainsSongsResponseList.yaml'
+    '400':
+      description: Некорректные входные данные
+    '500':
+      description: Внутренняя ошибка сервера

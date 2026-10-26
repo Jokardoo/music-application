@@ -1,0 +1,7 @@
+openapi: 3.0.1
+info:
+  title: Music Service API
+  version: 1.0.0
+paths:
+  /api/v1/music/find:
+    $ref: './paths/find-music.yaml'
