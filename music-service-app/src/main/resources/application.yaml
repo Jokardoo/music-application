@@ -39,7 +39,7 @@ spring:
 
 springdoc:
   api-docs:
-    enabled: false # Отключаем автогенерацию из кода, если она не нужна
+    enabled: true # Включаем / отключаем автогенерацию из кода, если она не нужна
   swagger-ui:
     url: /openapi.yaml # Swagger UI будет читать этот файл
     path: /swagger-ui.html

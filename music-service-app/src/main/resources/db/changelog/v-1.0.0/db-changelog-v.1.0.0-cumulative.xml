@@ -9,5 +9,7 @@
     <include file="01--26-10-12--create-table-musician.xml" relativeToChangelogFile="true"/>
     <include file="02--26-10-12--create-musicians-indexes.xml" relativeToChangelogFile="true"/>
     <include file="03--26-10-12--create-songs-table.xml" relativeToChangelogFile="true"/>
+    <include file="04--26-10-21--create-table-song-metadata.xml" relativeToChangelogFile="true"/>
+    <include file="05--26-10-21--alter-enum-music-genre-add-unknown-value.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

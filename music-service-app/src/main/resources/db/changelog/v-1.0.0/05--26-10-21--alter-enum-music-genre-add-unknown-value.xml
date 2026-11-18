@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+    <changeSet id="05--26-10-21--alter-enum-music-genre-add-unknown-value" author="Барков Даниил">
+
+        <preConditions onFail="HALT">
+            <sqlCheck expectedResult="1">
+                SELECT count(*) FROM pg_type WHERE typname = 'music_genre_enum'
+            </sqlCheck>
+
+            <sqlCheck expectedResult="0">
+                SELECT count(*)
+                FROM pg_enum e
+                         JOIN pg_type t ON t.oid = e.enumtypid
+                WHERE t.typname = 'music_genre_enum'
+                  AND e.enumlabel = 'UNKNOWN'
+            </sqlCheck>
+        </preConditions>
+
+        <sql>
+            ALTER TYPE music_genre_enum ADD VALUE IF NOT EXISTS 'UNKNOWN';
+        </sql>
+
+        <rollback>
+            <comment>PostgreSQL does not support removing ENUM values; rollback is a no-op.</comment>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>

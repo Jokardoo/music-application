@@ -1,7 +1,8 @@
 package ru.jokardo.music_service.util;
 
+import ru.jokardo.music.contract.model.SongCreateRequest;
 import ru.jokardo.music_service.constants.ApplicationTestConstants;
-import ru.jokardo.shared_dtos.music_service.request.SongCreateRequest;
+//import ru.jokardo.shared_dtos.music_service.request.SongCreateRequest;
 
 public class SongCreateRequestGenerator {
 

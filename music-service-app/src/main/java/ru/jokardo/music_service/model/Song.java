@@ -19,7 +19,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import ru.jokardo.shared_dtos.music_service.enums.MusicGenre;
+import ru.jokardo.music.contract.model.MusicGenre;
+//import ru.jokardo.shared_dtos.music_service.enums.MusicGenre;
 
 import java.time.LocalDate;
 import java.util.UUID;

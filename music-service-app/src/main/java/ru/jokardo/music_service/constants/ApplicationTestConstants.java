@@ -1,7 +1,8 @@
 package ru.jokardo.music_service.constants;
 
 import lombok.experimental.UtilityClass;
-import ru.jokardo.shared_dtos.music_service.enums.MusicGenre;
+import ru.jokardo.music.contract.model.MusicGenre;
+//import ru.jokardo.shared_dtos.music_service.enums.MusicGenre;
 
 import java.time.LocalDate;
 

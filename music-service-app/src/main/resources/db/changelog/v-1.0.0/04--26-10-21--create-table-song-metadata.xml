@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+    <changeSet id="04--26-10-21--create-table-songs-metadata" author="Барков Даниил">
+
+        <preConditions onFail="HALT">
+            <not>
+                <tableExists tableName="songs_metadata"/>
+            </not>
+            <tableExists tableName="songs"/>
+        </preConditions>
+
+        <createTable tableName="songs_metadata">
+            <column name="id" type="UUID" defaultValueComputed="gen_random_uuid()">
+                <constraints primaryKey="true"
+                             nullable="false"
+                             primaryKeyName="pk_songs_metadata"/>
+            </column>
+
+            <column name="song_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="download_link" type="varchar"/>
+
+            <column name="image_link" type="varchar"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="songs_metadata"/>
+        </rollback>
+
+    </changeSet>
+
+    <changeSet id="04--26-10-21--add-fk-songs-metadata-song-id" author="Барков Даниил">
+
+        <preConditions onFail="HALT">
+            <tableExists tableName="songs_metadata"/>
+            <tableExists tableName="songs"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_songs_metadata_song"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint
+                baseTableName="songs_metadata"
+                baseColumnNames="song_id"
+                referencedTableName="songs"
+                referencedColumnNames="id"
+                constraintName="fk_songs_metadata_song"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
+
+        <rollback>
+            <dropForeignKeyConstraint
+                    baseTableName="songs_metadata"
+                    constraintName="fk_songs_metadata_song"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="04--26-10-21--add-index-songs-metadata-song" author="Барков Даниил">
+        <preConditions onFail="HALT">
+            <tableExists tableName="songs_metadata"/>
+            <not>
+                <indexExists indexName="idx_songs_metadata_song_id" tableName="songs_metadata"/>
+            </not>
+        </preConditions>
+
+        <createIndex tableName="songs_metadata" indexName="idx_songs_metadata_song_id">
+            <column name="song_id"/>
+        </createIndex>
+
+        <rollback>
+            <dropIndex tableName="songs_metadata" indexName="idx_songs_metadata_song_id"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
