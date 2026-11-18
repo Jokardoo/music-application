@@ -5,6 +5,7 @@ import ru.jokardo.auth.contracts.grpc.GetUserProfileByEmailRequest;
 import ru.jokardo.auth.contracts.grpc.GetUserProfileByUsernameRequest;
 import ru.jokardo.auth.contracts.grpc.GetUserProfileRequest;
 import ru.jokardo.auth.contracts.grpc.UserProfileGrpc;
+import ru.jokardo.music_service.constants.ApplicationExceptionsConstants;
 import ru.jokardo.shared_dtos.auth_service.cache.UserProfile;
 import ru.jokardo.shared_dtos.auth_service.enums.RoleEnum;
 
@@ -15,6 +16,11 @@ import java.util.UUID;
 public class UserProfileGrpcMapper {
 
     public UserProfile toUserProfile(UserProfileGrpc proto) {
+
+        if (proto == null) {
+            throw new IllegalArgumentException(String.format(ApplicationExceptionsConstants.OBJECT_SHOULD_NOT_BE_NULL_PATTERN, "UserProfileGrpc"));
+        }
+
         return UserProfile.builder()
                 .id(parseUuid(proto.getId()))
                 .username(proto.getUsername())
